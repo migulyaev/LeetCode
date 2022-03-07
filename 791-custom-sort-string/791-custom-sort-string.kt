@@ -15,13 +15,13 @@ class Solution {
             setOrder.add(it)
         }
         
-        var result = ""
+        var result = StringBuilder()
         
         order.forEach {
             val countOfSymbolInString = map[it]
             if (countOfSymbolInString != null) {
                 for (i in 0 until countOfSymbolInString) {
-                    result += it
+                    result.append(it)
                 }
             }
         }
@@ -29,9 +29,9 @@ class Solution {
         map.forEach { (k, v) ->
             if (setOrder.contains(k)) return@forEach
             for (i in 0 until v) {
-                result += k
+                result.append(k)
             }
         }
-        return result
+        return result.toString()
     }
 }
