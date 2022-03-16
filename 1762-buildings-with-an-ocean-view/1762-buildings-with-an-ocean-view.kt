@@ -1,19 +1,15 @@
 class Solution {
     fun findBuildings(heights: IntArray): IntArray {
-        var result = arrayListOf<Int>()
-        for (i in 0 until heights.size - 1) {
-            var isOceanView = true
-            for (j in i + 1 until heights.size) {
-                if (heights[j] >= heights[i]) {
-                    isOceanView = false
-                    break
-                }
-            }
-            if (isOceanView) {
+        val result = arrayListOf<Int>()
+        result.add(heights.size - 1)
+        var maxSize = heights.last()
+        for (i in heights.size - 2 downTo 0) {
+            if (heights[i] > maxSize) {
                 result.add(i)
+                maxSize = heights[i]
             }
         }
-        result.add(heights.size - 1)
+        result.sort()
         return result.toIntArray()
     }
 }
