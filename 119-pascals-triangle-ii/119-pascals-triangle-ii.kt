@@ -1,6 +1,5 @@
 class Solution {
     fun getRow(rowIndex: Int): List<Int> {
-        if (rowIndex == 0) return listOf(1)
         val currentRow = arrayListOf(1)
         for (i in 1..rowIndex) {
             val prevRow = arrayListOf<Int>()
