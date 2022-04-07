@@ -1,10 +1,14 @@
 class Solution {
     fun getRow(rowIndex: Int): List<Int> {
         val currentRow = arrayListOf(1)
+        val prevRow = arrayListOf(1)
         for (i in 1..rowIndex) {
-            val prevRow = arrayListOf<Int>()
             for (j in 0 until currentRow.size) {
-                prevRow.add(currentRow[j])
+                if (j < prevRow.size) {
+                    prevRow[j] = currentRow[j]
+                } else {
+                    prevRow.add(currentRow[j])
+                }
             }
             for (j in 1..currentRow.size) {
                 if (j == currentRow.size) {
