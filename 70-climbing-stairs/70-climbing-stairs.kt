@@ -1,22 +1,15 @@
 class Solution {
     
-    private lateinit var cache: Array<Int>
-    
     fun climbStairs(n: Int): Int {
-        cache = Array<Int>(n) { 0 }
-        return climbRecursive(n)
+        if (n <= 2) return n
+        val floors = Array<Int>(n + 1) { 0 }
+        floors[1] = 1
+        floors[2] = 2
+        for (i in 3..n) {
+            floors[i] = floors[i-1] + floors[i-2]
+        }
+        return floors[n]
     }
-    
-    private fun climbRecursive(currentFloor: Int): Int {
-        if (currentFloor <= 2) {
-            return currentFloor
-        }
-        if (cache[currentFloor - 1] != 0) {
-            return cache[currentFloor - 1]
-        }
-        return (climbRecursive(currentFloor - 1) + climbRecursive(currentFloor - 2)).apply {
-            cache[currentFloor - 1] = this
-        }
-    }
+
 
 }
