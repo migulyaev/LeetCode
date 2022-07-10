@@ -13,7 +13,14 @@ class Solution {
         var node1 = list1
         var node2 = list2
         var lastNode: ListNode? = null
-        while (node1 != null || node2 != null) {
+        if (node1 == null || node2 == null) {
+            if (node1 != null) {
+                return node1
+            } else {
+                return node2
+            }
+        }
+        while (node1 != null && node2 != null) {
             val value1 = node1?.`val` ?: 101
             val value2 = node2?.`val` ?: 101
             val min = Math.min(value1, value2)
@@ -29,6 +36,11 @@ class Solution {
             } else {
                 node2 = node2?.next
             }
+        }
+        if (node1 != null) {
+            lastNode?.next = node1
+        } else if (node2 != null) {                
+            lastNode?.next = node2
         }
         return result
     }
