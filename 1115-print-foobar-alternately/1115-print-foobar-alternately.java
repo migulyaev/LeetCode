@@ -3,7 +3,7 @@ class FooBar {
     private ReentrantLock lock = new ReentrantLock();
     private Condition printFooCondition = lock.newCondition();
     private Condition printBarCondition = lock.newCondition();
-    private boolean isBarPrinted = true;
+    private volatile boolean isBarPrinted = true;
 
     public FooBar(int n) {
         this.n = n;
