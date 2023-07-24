@@ -5,7 +5,7 @@ class Solution {
         for (i in 0..median) {
             if (s[i] < s[s.length-i-1]) {
                 stringBuilder[s.length-i-1] = s[i]
-            } else {
+            } else if (s[i] > s[s.length-i-1]) {
                 stringBuilder[i] = s[s.length-i-1]
             }
         }
