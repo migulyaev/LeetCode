@@ -1,23 +1,17 @@
 class Solution {
     fun lengthOfLongestSubstring(s: String): Int {
-        var map = hashMapOf<Char, Int>()
         var max = 0
         for (i in 0 until s.length) {
-            val symbol = s[i]
-            if (map.containsKey(symbol)) {
-                val keysToRemove = arrayListOf<Char>()
-                val indexToRemove = map[symbol]!!
-                map.forEach {
-                    if (map[it.key]!! <= indexToRemove) {
-                        keysToRemove.add(it.key)
-                    }
-                }
-                keysToRemove.forEach {
-                    map.remove(it)
+            val map = hashMapOf<Char, Int>()
+            for (j in i until s.length) {
+                if (map.contains(s[j])) {
+                    max = Math.max(max, map.size)
+                    break
+                } else {
+                    map.put(s[j], j)
+                    max = Math.max(max, map.size)
                 }
             }
-            map.put(symbol, i)
-            max = Math.max(max, map.size)
         }
         return max
     }
