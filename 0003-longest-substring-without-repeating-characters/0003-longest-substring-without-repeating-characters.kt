@@ -1,19 +1,26 @@
 class Solution {
     fun lengthOfLongestSubstring(s: String): Int {
+        var left = 0
+        var right = 0
         var max = 0
-        for (i in 0 until s.length) {
-            val symbols = hashSetOf<Char>()
-            for (k in i until s.length) {
-                if (symbols.contains(s[k])) {
-                    break
-                } else {
-                    symbols.add(s[k])
+        val symbols = hashSetOf<Char>()
+        
+        while (right < s.length) {
+            if (symbols.contains(s[right])) {
+                while (s[left] != s[right]) {
+                    symbols.remove(s[left])
+                    left++
+                }
+                left++
+            } else {
+                symbols.add(s[right])
+                if (symbols.size > max) {
+                    max = symbols.size
                 }
             }
-            if (symbols.size > max) {
-                max = symbols.size
-            }
+            right++
         }
+        
         return max
     }
 }
