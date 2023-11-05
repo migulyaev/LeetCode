@@ -1,7 +1,11 @@
 class Solution {
     fun threeSum(nums: IntArray): List<List<Int>> {
-        nums.sort()
+        // nums.sort()
         val result = hashSetOf<List<Int>>()
+        val positions = hashMapOf<Int, List<Int>>()
+        
+        // nums.forEachIndexed
+        
         for (i in 0 until nums.size - 2) {
             val twoSum = twoSum(nums.copyOfRange(i + 1, nums.size), -nums[i])
             twoSum.forEach {
