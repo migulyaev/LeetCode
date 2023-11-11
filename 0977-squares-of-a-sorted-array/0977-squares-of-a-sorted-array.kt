@@ -1,6 +1,6 @@
 class Solution {
     fun sortedSquares(nums: IntArray): IntArray {
-        val result = arrayListOf<Int>()
+        val result = IntArray(nums.size) { 0 }
         var positive = -1
         for (i in 0 until nums.size) {
             if (nums[i] >= 0) {
@@ -11,23 +11,25 @@ class Solution {
         
         var negative = if (positive != -1) positive - 1 else nums.size - 1
         
+        var counter = 0
         while (positive < nums.size && positive != -1 || negative != -1) {
             if (positive < nums.size && positive != -1 && negative >= 0) {
                 if (nums[positive] < abs(nums[negative])) {
-                    result.add(nums[positive] * nums[positive])
+                    result[counter] = nums[positive] * nums[positive]
                     positive++
                 } else {
-                    result.add(nums[negative] * nums[negative])
+                    result[counter] = nums[negative] * nums[negative]
                     negative--
                 }
             } else if (positive == nums.size || positive == -1) {
-                    result.add(nums[negative] * nums[negative])
+                    result[counter] = nums[negative] * nums[negative]
                     negative--
             } else if (negative < 0) {
-                    result.add(nums[positive] * nums[positive])
+                    result[counter] = nums[positive] * nums[positive]
                     positive++
             }
+            counter++
         }
-        return result.toIntArray()
+        return result
     }
 }
