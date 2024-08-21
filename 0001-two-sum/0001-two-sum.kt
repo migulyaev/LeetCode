@@ -1,14 +1,12 @@
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        val numbers = hashMapOf<Int, Int>()
-        nums.forEachIndexed { index, num ->
-            val needToTarget = target - num
-            if (numbers.containsKey(needToTarget)) {
-                return intArrayOf(index, numbers[needToTarget]!!)
+        for (i in 0 until nums.size - 1) {
+            for (k in i + 1 until nums.size) {
+                if (nums[i] + nums[k] == target) {
+                    return intArrayOf(i, k)
+                }
             }
-            numbers[num] = index
         }
-        
         return intArrayOf()
     }
 }
