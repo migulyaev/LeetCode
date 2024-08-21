@@ -1,11 +1,21 @@
 class Solution {
+    
+    private val cache = hashMapOf<Int, Int>()
+    
     fun climbStairs(n: Int): Int {
-        val steps = Array(n + 1) { 0 }
-        steps[0] = 1
-        steps[1] = 1
-        for (i in 2..n) {
-            steps[i] = steps[i - 1] + steps[i - 2]
+        if (n == 1) return 1
+        if (n == 2) return 2
+        return calculateClimb(n)
+    }
+    
+    private fun calculateClimb(n: Int): Int {
+        if (n == 1) return 1
+        if (n == 2) return 2
+        if (cache.containsKey(n)) {
+            return cache[n]!!
         }
-        return steps[n]
+        return (calculateClimb(n - 1) + calculateClimb(n - 2)).also {
+            cache[n] = it
+        }
     }
 }
