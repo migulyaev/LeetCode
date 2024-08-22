@@ -9,17 +9,25 @@
  * }
  */
 class Solution {
-    var max = 0
     fun maxDepth(root: TreeNode?): Int {
-        return helper(root, 1)
-    }
-    
-    private fun helper(node: TreeNode?, depth: Int): Int {
-        if (node == null) {
-            return depth - 1
+        val queue: ArrayDeque<TreeNode> = ArrayDeque<TreeNode>()
+        var level = 0
+        if (root == null) return 0
+        queue.addFirst(root!!)
+        while (queue.isNotEmpty()) {
+            val size = queue.size
+            for (i in 0 until size) {
+                val node = queue.removeFirst()
+                if (node.left != null) {
+                    queue.addLast(node.left!!)
+                }
+                if (node.right != null) {
+                    queue.addLast(node.right!!)
+                }
+            }
+            level++
         }
-        val left = helper(node.left, depth + 1)
-        val right = helper(node.right, depth + 1)
-        return max(left, right)
+        return level
     }
+
 }
