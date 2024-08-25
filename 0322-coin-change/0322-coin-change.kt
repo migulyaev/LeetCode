@@ -1,44 +1,14 @@
 class Solution {
-    val memo = hashMapOf<Int, Int>()
     fun coinChange(coins: IntArray, amount: Int): Int {
-        if (amount == 0) {
-            return 0
+        val MAX_IMPOSSIBLE_VALUE = 10001
+        val dp = Array<Int>(amount + 1) { 10001 }
+        dp[0] = 0
+        for (coin in coins) {
+            for (currentAmount in coin..amount) {
+                dp[currentAmount] = min(dp[currentAmount], dp[currentAmount - coin] + 1)
+            }
         }
-        for (i in 0 until coins.size) {
-            val coin = coins[i]
-            memo[coin] = 1
-        }
-        for (i in 0 until amount) {
-            calculate(coins, i+1)
-        }
-        return memo[amount]!!
+        return if (dp[amount] == MAX_IMPOSSIBLE_VALUE) -1 else dp[amount]!!
     }
     
-    private fun calculate(coins: IntArray, amount: Int): Int {
-        if (memo.containsKey(amount)) {
-            return memo[amount]!!
-        }
-        if (amount <= 0) {
-            return -1
-        }
-        var minValue = Int.MAX_VALUE
-        for (i in 0 until coins.size) {
-            val coin = coins[i]
-            val count = calculate(coins, amount - coins[i])
-            if (count == -1) {
-                continue
-            }
-            if (count > 0) {
-                val amountOfCoins = count + 1
-                if (amountOfCoins < minValue) {
-                    minValue = amountOfCoins
-                }
-            }
-        }
-        if (minValue == Int.MAX_VALUE) {
-            minValue = -1
-        }
-        memo[amount] = minValue
-        return minValue
-    }
 }
