@@ -7,6 +7,7 @@ class Solution {
         var left = 0
         var right = 0
         var maxCountInWindow = 0
+        var max = 0
         while (right < s.length) {
             val next = s[right]
             chars[next - 'A'] = chars[next - 'A'] + 1
@@ -15,9 +16,11 @@ class Solution {
             if (length - maxCountInWindow > k) {
                 chars[s[left] - 'A'] = chars[s[left] - 'A'] - 1
                 left++
+            } else {
+                max = max(max, length)
             }
             right++
         }
-        return right - left
+        return max
     }
 }
