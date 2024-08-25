@@ -3,22 +3,18 @@ class Solution {
         var left = 0
         var right = 0
         var max = 0
-        val symbols = hashSetOf<Char>()
-        
+        val set = hashSetOf<Char>()
         while (right < s.length) {
-            if (symbols.contains(s[right])) {
-                while (s[left] != s[right]) {
-                    symbols.remove(s[left])
-                    left++
-                }
+            if (set.contains(s[right])) {
+                val leftChar = s[left]
+                set.remove(leftChar)
                 left++
             } else {
-                symbols.add(s[right])
-                if (symbols.size > max) {
-                    max = symbols.size
-                }
+                set.add(s[right])
+                val length = right - left + 1
+                max = max(max, length)
+                right++
             }
-            right++
         }
         
         return max
