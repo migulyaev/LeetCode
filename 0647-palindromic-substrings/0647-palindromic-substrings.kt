@@ -7,12 +7,11 @@ class Solution {
                 var start = i
                 var end = k
                 while (start < end) {
-                    if (s[start] == s[end]) {
-                        start++
-                        end--
-                    } else {
+                    if (s[start] != s[end]) {
                         break
                     }
+                    start++
+                    end--
                 }
                 if (start >= end) {
                     result++
