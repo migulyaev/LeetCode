@@ -1,16 +1,16 @@
 class Solution {
     fun mergeAlternately(word1: String, word2: String): String {
-        var pointerOne = 0
-        var pointerTwo = 0
+        var i = 0
+        var k = 0
         var result = ""
-        while (pointerOne <= word1.length - 1 || pointerTwo <= word2.length - 1) {
-            if (pointerOne <= word1.length - 1) {
-                result += word1[pointerOne]
-                pointerOne++
+        while (i < word1.length || k < word2.length) {
+            if (i < word1.length) {
+                result += word1[i]
+                i++
             }
-            if (pointerTwo <= word2.length - 1) {
-                result += word2[pointerTwo]
-                pointerTwo++
+            if (k < word2.length) {
+                result += word2[k]
+                k++
             }
         }
         return result
