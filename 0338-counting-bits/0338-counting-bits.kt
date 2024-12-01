@@ -1,14 +1,15 @@
 class Solution {
     fun countBits(n: Int): IntArray {
-        val result = IntArray(n + 1) { 0 }
-        var offset = 1
-        result[0] = 0
-        for (i in 1..n) { // O(N)
-            if (offset * 2 == i) {
-                offset = i
+        val ans = IntArray(n + 1) { 0 }
+        for (i in 0..n) {
+            var count = 0
+            var temp = i
+            while (temp > 0) {
+                if (temp % 2 == 1) count++
+                temp /= 2
             }
-            result[i] = result[i - offset] + 1
+            ans[i] = count
         }
-        return result
+        return ans
     }
 }
