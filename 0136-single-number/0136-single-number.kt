@@ -1,14 +1,9 @@
 class Solution {
     fun singleNumber(nums: IntArray): Int {
-        val map = hashMapOf<Int, Int>()
+        var result = 0
         nums.forEach {
-            map[it] = (map[it] ?: 0) + 1
+            result = result.xor(it)
         }
-        nums.forEach {
-            if (map.get(it) == 1) {
-                return it
-            }
-        }
-        return 0
+        return result
     }
 }
