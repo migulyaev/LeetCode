@@ -9,24 +9,14 @@
  */
 class Solution {
     fun deleteMiddle(head: ListNode?): ListNode? {
-        var size = 0
-
-        var node = head
-        while (node != null) {
-            size++
-            node = node.next
-        }
-        
-        if (size <= 1) {
+        if (head?.next == null) {
             return null
         }
-        
-        val nodeToDelete = size / 2
-        var i = 0
-        node = head
-        while (i < nodeToDelete - 1) {
+        var node = head
+        var fastNode = head?.next?.next
+        while (fastNode != null && fastNode.next != null) {
             node = node?.next
-            i++
+            fastNode = fastNode?.next?.next
         }
         
         node?.next = node?.next?.next
