@@ -10,10 +10,10 @@ class Solution {
                 stack.addLast(c)
             }
         }
-        var result = ""
+        var result = StringBuilder()
         stack.forEach {
-            result += it
+            result.append(it)
         }
-        return result
+        return result.toString()
     }
 }
