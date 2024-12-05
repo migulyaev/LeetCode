@@ -1,17 +1,21 @@
 class Solution {
     fun reverseWords(s: String): String {
-        var result = ""
-        var skipWhitespaces = true
-        s.forEach {
-            if (it == ' ') {
-                if (skipWhitespaces) return@forEach
-                result += " "
-                skipWhitespaces = true
-            } else {
-                skipWhitespaces = false
-                result += it
+        val words = ArrayDeque<String>()
+        var i = 0
+        val word = StringBuilder()
+        while (i < s.length) {
+            while (i < s.length && s[i] == ' ') i++
+            if (i == s.length) {
+                continue
             }
+            
+            word.clear()
+            while (i < s.length && s[i] != ' ') {
+                word.append(s[i])
+                i++
+            }
+            words.addFirst(word.toString())
         }
-        return result.split(" ").reversed().joinToString(" ").trim()
+        return words.joinToString(" ")
     }
 }
