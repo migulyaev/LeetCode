@@ -1,17 +1,14 @@
 class Solution {
     fun reverseVowels(s: String): String {
-        val vowels = arrayListOf<Int>()
-        for (i in 0 until s.length) {
-            if (s[i].isVowel()) {
-                vowels.add(i)
-            }
-        }
         val result = StringBuilder(s)
         var a = 0
-        var z = vowels.size - 1
+        var z = s.length - 1
         while (a < z) {
-            result[vowels[a]] = s[vowels[z]]
-            result[vowels[z]] = s[vowels[a]]
+            while (a < s.length && !s[a].isVowel()) a++
+            while (z > 0 && !s[z].isVowel()) z--
+            if (a >= z) continue
+            result[a] = s[z]
+            result[z] = s[a]
             a++
             z--
         }
