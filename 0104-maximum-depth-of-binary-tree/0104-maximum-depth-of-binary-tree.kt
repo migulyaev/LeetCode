@@ -10,24 +10,15 @@
  */
 class Solution {
     fun maxDepth(root: TreeNode?): Int {
-        val queue: ArrayDeque<TreeNode> = ArrayDeque<TreeNode>()
-        var level = 0
-        if (root == null) return 0
-        queue.addFirst(root!!)
-        while (queue.isNotEmpty()) {
-            val size = queue.size
-            for (i in 0 until size) {
-                val node = queue.removeFirst()
-                if (node.left != null) {
-                    queue.addLast(node.left!!)
-                }
-                if (node.right != null) {
-                    queue.addLast(node.right!!)
-                }
-            }
-            level++
-        }
-        return level
+        return getMaxDepth(root, 1)
     }
-
+    
+    private fun getMaxDepth(current: TreeNode?, currentDepth: Int): Int {
+        if (current == null) {
+            return currentDepth - 1
+        }
+        val left = getMaxDepth(current.left, currentDepth + 1)
+        val right = getMaxDepth(current.right, currentDepth + 1)
+        return max(left, right)
+    }
 }
