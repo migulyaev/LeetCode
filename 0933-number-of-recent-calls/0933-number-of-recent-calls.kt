@@ -1,12 +1,10 @@
 class RecentCounter() {
     
-    private val pings = PriorityQueue<Int>()
+    private val pings = LinkedList<Int>()
 
     fun ping(t: Int): Int {
-        while (pings.peek() != null && pings.peek() + 3000 < t) {
-            pings.remove()
-        }
-        pings.offer(t)
+        pings.addLast(t)
+        while (pings.getFirst() < t - 3000) pings.removeFirst()
         return pings.size
     }
 
