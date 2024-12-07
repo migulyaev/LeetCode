@@ -18,17 +18,18 @@ class Solution {
         }
     }
     
+    private val dictionary = mapOf(
+            '2' to listOf('a', 'b', 'c'),
+            '3' to listOf('d', 'e', 'f'),
+            '4' to listOf('g', 'h', 'i'),
+            '5' to listOf('j', 'k', 'l'),
+            '6' to listOf('m', 'n', 'o'),
+            '7' to listOf('p', 'q', 'r', 's'),
+            '8' to listOf('t', 'u', 'v'),
+            '9' to listOf('w', 'x', 'y', 'z'),
+    )
+    
     private fun get(number: Char): List<Char> {
-        return when(number) {
-            '2' -> listOf('a', 'b', 'c')
-            '3' -> listOf('d', 'e', 'f')
-            '4' -> listOf('g', 'h', 'i')
-            '5' -> listOf('j', 'k', 'l')
-            '6' -> listOf('m', 'n', 'o')
-            '7' -> listOf('p', 'q', 'r', 's')
-            '8' -> listOf('t', 'u', 'v')
-            '9' -> listOf('w', 'x', 'y', 'z')
-            else -> throw IllegalStateException("")
-        }
+        return dictionary[number]!!
     }
 }
