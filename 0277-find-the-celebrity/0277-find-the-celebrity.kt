@@ -12,9 +12,6 @@ class Solution: Relation() {
                     knownByEveryone = false
                     break
                 }
-            }
-            for (k in 0 until n) {
-                if (i == k) continue
                 if (knows(i, k)) {
                     knowsNoone = false
                     break
