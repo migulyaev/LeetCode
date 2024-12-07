@@ -1,19 +1,12 @@
 class Solution {
     fun findKthLargest(nums: IntArray, k: Int): Int {
-       val queue = PriorityQueue<Int> { f, s ->
-          if (s > f) 1 else -1
-       }
-       for (i in nums) {
-           queue.offer(i)
-       }
-       var i = 0
-       while (true) {
-           val element = queue.poll()
-           i++
-           if (i == k) {
-               return element
-           }
-       }
-       return 0
+        val queue = PriorityQueue<Int>() // Min-heap
+        for (num in nums) {
+            queue.offer(num)
+            if (queue.size > k) {
+                queue.poll() // Remove the smallest element to keep the size at k
+            }
+        }
+        return queue.poll()
     }
 }
