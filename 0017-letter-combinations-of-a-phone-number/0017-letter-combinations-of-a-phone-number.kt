@@ -1,20 +1,24 @@
 class Solution {
     
     private val combinations = arrayListOf<String>()
+    private lateinit var digits: String
     
     fun letterCombinations(digits: String): List<String> {
         if (digits.isEmpty()) return emptyList()
-        combinations(digits, "")
+        this.digits = digits
+        combinations(0, StringBuilder())
         return combinations
     }
     
-    private fun combinations(digits: String, currentString: String) {
-        if (digits.isEmpty()) {
-            combinations.add(currentString)
+    private fun combinations(i: Int, builder: StringBuilder) {
+        if (i == digits.length) {
+            combinations.add(builder.toString())
             return
         }
-        get(digits.first()).forEach {
-            combinations(digits.replaceFirstChar { "" }, currentString + it)
+        get(digits[i]).forEach {
+            builder.append(it)
+            combinations(i + 1, builder)
+            builder.deleteCharAt(i)
         }
     }
     
