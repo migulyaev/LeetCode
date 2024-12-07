@@ -1,9 +1,11 @@
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        for (i in 0 until nums.size - 1) {
-            for (k in i + 1 until nums.size) {
-                if (nums[i] + nums[k] == target) return intArrayOf(i, k)
+        val map = hashMapOf<Int, Int>()
+        for (i in 0 until nums.size) {
+            if (map.containsKey(target - nums[i])) {
+                return intArrayOf(i, map[target - nums[i]]!!)
             }
+            map[nums[i]] = i
         }
         return intArrayOf()
     }
