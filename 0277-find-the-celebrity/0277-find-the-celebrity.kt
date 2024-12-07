@@ -3,22 +3,26 @@
 
 class Solution: Relation() {
     override fun findCelebrity(n: Int) : Int {
-        for (i in 0 until n) {
-            var knownByEveryone = true
-            var knowsNoone = true
-            for (k in 0 until n) {
-                if (i == k) continue
-                if (!knows(k, i)) {
-                    knownByEveryone = false
-                    break
-                }
-                if (knows(i, k)) {
-                    knowsNoone = false
-                    break
-                }
+        var potentialCelebrity = 0
+        for (i in 1 until n) {
+            if (knows(potentialCelebrity, i)) {
+                potentialCelebrity = i
             }
-            if (knownByEveryone && knowsNoone) return i
+        }
+        if (isCelebrity(potentialCelebrity, n)) {
+            return potentialCelebrity
         }
         return -1
 	}
+    private fun isCelebrity(i: Int, n: Int): Boolean {
+        var isCelebrity = true
+        for (k in 0 until n) {
+            if (i == k) continue
+            if (knows(i, k) || !knows(k, i)) {
+                isCelebrity = false
+                break
+            }
+        }
+        return isCelebrity
+    }
 }
