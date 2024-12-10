@@ -1,29 +1,21 @@
 class Solution {
     fun maximumLength(s: String): Int {
-        val sequencesQueue = ArrayDeque<Pair<Char, Int>>()
-        var lastSymbol: Char = s[0]
-        for (i in 0 until s.length) {
-            if (i == 0) {
-                lastSymbol = s[i]
-                sequencesQueue.addFirst(Pair(s[i], 1))
-            } else {
-                if (lastSymbol != s[i]) {
-                    lastSymbol = s[i]
-                    sequencesQueue.addFirst(Pair(s[i], 1))
-                } else {
-                    val lastPair = sequencesQueue.removeFirst()
-                    sequencesQueue.addFirst(Pair(s[i], lastPair.second + 1))
-                }
-            }
+    val sequencesQueue = ArrayDeque<Pair<Char, Int>>()
+    var count = 1
+
+    // Build sequences of consecutive characters
+    for (i in 1..s.length) {
+        if (i == s.length || s[i] != s[i - 1]) {
+            sequencesQueue.addFirst(Pair(s[i - 1], count))
+            count = 1
+        } else {
+            count++
         }
-        
-        val goodSubstrings = HashMap<Char, ArrayList<Int>>()
-        while (sequencesQueue.isNotEmpty()) {
-            val subsequence = sequencesQueue.removeFirst()
-                            goodSubstrings[subsequence.first] = (goodSubstrings[subsequence.first] ?: ArrayList<Int>()).apply {
-                    add(subsequence.second)
-                }
-        }
+    }
+
+    // Group subsequences by character and their lengths
+    val goodSubstrings = sequencesQueue.groupBy({ it.first }, { it.second })
+        .mapValues { ArrayList(it.value) }
         
         var max = -1
         for (key in goodSubstrings.keys) {
