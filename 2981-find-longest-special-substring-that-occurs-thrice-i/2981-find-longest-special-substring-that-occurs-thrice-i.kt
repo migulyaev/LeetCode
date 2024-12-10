@@ -29,10 +29,6 @@ class Solution {
                 }
                 2 -> {
                     if (substrings.first() == 1 && substrings.last() == 1) continue
-                    if (substrings.first() == substrings.last()) {
-                        max = max(max, substrings.last() - 1)
-                        continue
-                    }
                     val potentialString = if (substrings.last() - 1 <= substrings.first()) {
                         substrings.last() - 1
                     } else {
@@ -40,22 +36,15 @@ class Solution {
                     }
                     max = max(max, max(substrings.last() - 2, potentialString))
                 }
-                3 -> {
-                    
+                else -> {
+                    max = max(max, substrings[substrings.size - 3])
+                    val potentialString = if (substrings.last() - 1 <= substrings[substrings.size - 2]) {
+                        substrings.last() - 1
+                    } else {
+                        -1
+                    }
+                    max = max(max, max(substrings.last() - 2, potentialString))
                 }
-            }
-            if (substrings.size == 1) {
-
-            } else if (substrings.size == 2) {
-                
-            } else {
-                max = max(max, substrings[substrings.size - 3])
-                val potentialString = if (substrings.last() - 1 <= substrings[substrings.size - 2]) {
-                    substrings.last() - 1
-                } else {
-                    -1
-                }
-                max = max(max, max(substrings.last() - 2, potentialString))
             }
         }
         return max
