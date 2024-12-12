@@ -1,11 +1,19 @@
 class Solution {
     fun pickGifts(gifts: IntArray, k: Int): Long {
-        for (i in 0 until k) {
-            val maxIndex = maxIndex(gifts)
-            val sqrt = Math.sqrt(gifts[maxIndex].toDouble()).toInt()
-            gifts[maxIndex] = sqrt
+        val minHeap = PriorityQueue<Int>(Comparator { a, b -> b - a })
+        for (i in 0 until gifts.size) {
+            minHeap.offer(gifts[i])
         }
-        return gifts.map { it.toLong() }.sum()
+        for (i in 0 until k) {
+            minHeap.remove()?.let { first ->
+                minHeap.offer(Math.sqrt(first.toDouble()).toInt())
+            }
+        }
+        var result = 0L
+        while (minHeap.isNotEmpty()) {
+            result += minHeap.remove()?.toLong() ?: 0L
+        }
+        return result
     }
     
     private fun maxIndex(arr: IntArray): Int {
